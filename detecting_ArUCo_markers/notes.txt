@@ -1,0 +1,26 @@
+Detecting ArUCo Markers:
+
+Step #1: Use the cv2.aruco.Dictionary_get function to grab the dictionary of ArUco markers we’re using.
+Step #2: Define the ArUco detection parameters using cv2.aruco.DetectorParameters_create.
+Step #3: Perform ArUco marker detection via the cv2.aruco.detectMarkers function.
+
+ArUCo marker detection in code:
+
+arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_6X6_50)
+arucoParams = cv2.aruco.DetectorParameters_create()
+(corners, ids, rejected) = cv2.aruco.detectMarkers(image, arucoDict, parameters=arucoParams)
+
+cv2.aruco.detectMarkers arguments:
+image: the image we want to detect ArUCo markers with
+
+arucoDict: the ArUCo dictionary we're using
+
+parameters: the ArUco parameters used for detection (unless you have a good reason to modify the parameters, the default parameters returned by cv2.aruco.DetectorParameters_create are typically sufficient)
+
+After applying ArUco tag detection, the cv2.aruco.detectMarkers method returns 3 values:
+
+corners: a list containing the (x, y) coordinates of our detected ArUCo markers
+
+ids: the ArUCo IDs of the detected markers
+
+rejected: a list of potential markers that were found but ultimately rejected due to the inner code of the marker being unable to be parsed ( visualizing the rejected markers is often useful for debugging purposes)

@@ -1,0 +1,22 @@
+April tags and ArUCo markers are 2D binary patterns that computer vision algorithms can easily detect.
+
+Typically, ArUCo markers and April tags are used for:
+
+camera calibration
+object size estimation
+measuring the distance between camera and object
+3D position
+object orientation
+robotics and autonomous navigation
+
+Benefits of using ArUCo over April tags:
+
+ArUCo markers are built into the opencv library via the cv2.aruco submodule
+
+The openCV library can generate ArUCo markers via the cv2.aruco.drawMaker function
+
+There are online ArUCo generators whereas April tags have no easily findable online generators
+
+There are ROS (Robot Operating System) implementations of ArUCo markers
+
+From an implementation perspective, ArUco marker detections tend to be more accurate, even when using the default parameters

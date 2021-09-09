@@ -1,0 +1,75 @@
+OpenCV built in ArUCo marker function:
+cv2.aruco.drawMaker(dictionary, id, /
+sidePixels[, img[, borderBits]]) -> img
+
+parameter meanings:
+
+dictionary: The ArUCo dictionary specifying the type of markers we're using
+
+id: The ID of the marker we'll be drawing (has to be a valid ID in the ArUCo dictionary)
+
+sidePixels: The size in px of the square image that we'll be drawing the ArUCo marker on
+
+borderBits: Width and height (in px) of the border
+
+How To Use:
+1). Select which ArUco dictionary you want to use
+2). Specify which ArUco ID you’re going to draw
+3). Allocate memory for your output ArUco image (in pixels)
+4). Use the drawMarker function to draw the ArUco tag
+5). Draw the ArUco marker itself
+
+Online ArUCo Generators:
+https://chev.me/arucogen/
+
+Online Instructions:
+
+1). Select the ArUco dictionary you want to use
+2). Enter the marker ID
+3). Specify the marker size (in millimeters)
+
+Python Dictionary of 21 Different ArUCo marker Dictionaries in OpenCV:
+
+ARUCO_DICT = {
+	"DICT_4X4_50": cv2.aruco.DICT_4X4_50,
+	"DICT_4X4_100": cv2.aruco.DICT_4X4_100,
+	"DICT_4X4_250": cv2.aruco.DICT_4X4_250,
+	"DICT_4X4_1000": cv2.aruco.DICT_4X4_1000,
+	"DICT_5X5_50": cv2.aruco.DICT_5X5_50,
+	"DICT_5X5_100": cv2.aruco.DICT_5X5_100,
+	"DICT_5X5_250": cv2.aruco.DICT_5X5_250,
+	"DICT_5X5_1000": cv2.aruco.DICT_5X5_1000,
+	"DICT_6X6_50": cv2.aruco.DICT_6X6_50,
+	"DICT_6X6_100": cv2.aruco.DICT_6X6_100,
+	"DICT_6X6_250": cv2.aruco.DICT_6X6_250,
+	"DICT_6X6_1000": cv2.aruco.DICT_6X6_1000,
+	"DICT_7X7_50": cv2.aruco.DICT_7X7_50,
+	"DICT_7X7_100": cv2.aruco.DICT_7X7_100,
+	"DICT_7X7_250": cv2.aruco.DICT_7X7_250,
+	"DICT_7X7_1000": cv2.aruco.DICT_7X7_1000,
+	"DICT_ARUCO_ORIGINAL": cv2.aruco.DICT_ARUCO_ORIGINAL,
+	"DICT_APRILTAG_16h5": cv2.aruco.DICT_APRILTAG_16h5,
+	"DICT_APRILTAG_25h9": cv2.aruco.DICT_APRILTAG_25h9,
+	"DICT_APRILTAG_36h10": cv2.aruco.DICT_APRILTAG_36h10,
+	"DICT_APRILTAG_36h11": cv2.aruco.DICT_APRILTAG_36h11
+}
+
+The majority of these dictionaries follow a specific naming convention, cv2.aruco.DICT_NxN_M, with an NxN size followed by an integer value, M.
+
+The NxN value is the 2D bit size of the ArUco marker. For example, for a 6×6 marker we have a total of 36 bits.
+
+The integer M following the grid size specifies the total number of unique ArUco IDs that can be generated with that dictionary.
+
+How To Decide which Dictionary To Use:
+
+1). To start, consider how many unique values in the dictionary you need. Only need a small handful of markers? Choose a dictionary that has a smaller unique number of values then. Need to detect a lot of markers? Select a dictionary with more unique ID values. Essentially, pick a dictionary that has the bare minimum number of IDs you need — don’t take more than what you actually need.
+2). Look at your input image/video resolution size. Keep in mind that the larger your grid size gets, the larger the ArUco marker will need to be when captured by your camera. If you have a large grid but a low resolution input, then the marker may be undetectable (or may be misread).
+3). Consider the inter-marker distance. OpenCV’s ArUco detection implementation utilizes error correction to improve the accuracy and robustness of marker detection. The error correction hinges on the concept of inter-marker distance. Smaller dictionary sizes with larger NxN marker sizes increase the inter-marker distance, thereby making them less prone to false readings.
+
+Ideal Settings For An ArUco Dictionary Include:
+
+1). A low number of unique ArUco IDs that need to be generated and read
+2). High-quality image input containing the ArUco markers that will be detected
+3). A larger NxN grid size, balanced with a low number of unique ArUco IDs such that the inter-marker distance can be used to correct misread markers
+
+
